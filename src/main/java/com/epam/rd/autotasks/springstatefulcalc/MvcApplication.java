@@ -1,4 +1,4 @@
-package com.efimchik.ifmo.web.mvc;
+package com.epam.rd.autotasks.springstatefulcalc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.efimchick.ifmo.web.mvc;
+package com.epam.rd.autotasks.springstatefulcalc;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -25,7 +25,6 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
-import com.efimchik.ifmo.web.mvc.MvcApplication;
 import com.google.common.collect.ImmutableMap;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

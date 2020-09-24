@@ -1,4 +1,4 @@
-package com.efimchick.ifmo.web.mvc;
+package com.epam.rd.autotasks.springstatefulcalc;
 
 public class ResponseRecord {
     public final int code;

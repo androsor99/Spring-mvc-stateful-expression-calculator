@@ -1,4 +1,4 @@
-package com.efimchick.ifmo.web.mvc;
+package com.epam.rd.autotasks.springstatefulcalc;
 
 import java.io.IOException;
 import java.nio.file.Files;
