@@ -1,4 +1,4 @@
-# Spring Boot Stateful Expression Calculator
+# Spring MVC Stateful Expression Calculator
 
 Create a webapp serving expression value calculating.
 
