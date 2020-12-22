@@ -1,5 +1,6 @@
 package com.epam.rd.autotasks.springstatefulcalc;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Map;
@@ -7,6 +8,12 @@ import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.IntStream;
 
+import org.apache.catalina.LifecycleException;
+import org.apache.catalina.WebResourceRoot;
+import org.apache.catalina.core.StandardContext;
+import org.apache.catalina.startup.Tomcat;
+import org.apache.catalina.webresources.DirResourceSet;
+import org.apache.catalina.webresources.StandardRoot;
 import org.apache.http.Consts;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.config.RequestConfig;
@@ -26,8 +33,11 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
 import com.google.common.collect.ImmutableMap;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import javax.servlet.ServletException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -36,11 +46,42 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class StatefulCalcServletTest {
 
+    private static Tomcat tomcat;
+
     @BeforeAll
-    public static void startServer() {
+    public static void startServer() throws ServletException, LifecycleException {
 
-        MvcApplication.main(new String[]{});
+        int port = 8080;
 
+        tomcat = new Tomcat();
+        tomcat.setPort(port);
+
+        String webappDirLocation = "src/main/webapp/";
+        StandardContext ctx = (StandardContext) tomcat.addWebapp(
+                "", new File(webappDirLocation).getAbsolutePath()
+        );
+        System.out.println(
+                "configuring app with basedir: "
+                        + new File("./" + webappDirLocation).getAbsolutePath()
+        );
+
+
+        File additionWebInfClasses = new File("target/classes");
+        WebResourceRoot resources = new StandardRoot(ctx);
+        resources.addPreResources(
+                new DirResourceSet(
+                        resources,
+                        "/WEB-INF/classes",
+                        additionWebInfClasses.getAbsolutePath(), "/"));
+        ctx.setResources(resources);
+
+        tomcat.start();
+
+    }
+
+    @AfterAll
+    public static void stopServer() throws LifecycleException {
+        tomcat.stop();
     }
 
 
