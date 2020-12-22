@@ -345,7 +345,10 @@ public class StatefulCalcServletTest {
         assertFalse(Utils.findInSource("javax.servlet.Filter"));
         assertFalse(Utils.findInSource("javax.servlet.http.HttpServlet"));
         assertFalse(Utils.findInSource("HttpServlet"));
-        assertFalse(Utils.findInSource("Servlet"));
+        assertFalse(Utils.findInSource("doGet"));
+        assertFalse(Utils.findInSource("doPost"));
+        assertFalse(Utils.findInSource("doPut"));
+        assertFalse(Utils.findInSource("doDelete"));
     }
 
     private Random random = new Random();
